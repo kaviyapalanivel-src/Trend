@@ -2,12 +2,13 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "kaviyapalaniveel/trend-react-app"
-        DOCKER_TAG = "latest"
+        IMAGE_NAME = "kaviyapalaniveel/trend-react-app"
+        CONTAINER_NAME = "trend-react"
     }
 
     stages {
-        stage('Checkout Code') {
+
+        stage('Clone Repo') {
             steps {
                 checkout scm
             }
@@ -15,35 +16,37 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE:$DOCKER_TAG .'
+                sh 'docker build -t $IMAGE_NAME:latest .'
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Stop Old Container') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS'
-                )]) {
-                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                }
+                sh '''
+                docker rm -f $CONTAINER_NAME || true
+                '''
             }
         }
 
-        stage('Push Image to Docker Hub') {
+        stage('Run New Container') {
             steps {
-                sh 'docker push $DOCKER_IMAGE:$DOCKER_TAG'
+                sh '''
+                docker run -d \
+                --name $CONTAINER_NAME \
+                -p 80:80 \
+                $IMAGE_NAME:latest
+                '''
             }
         }
     }
 
     post {
         success {
-            echo 'Pipeline completed successfully'
+            echo " App deployed successfully!"
         }
         failure {
-            echo 'Pipeline failed'
+            echo " Deployment failed"
         }
     }
 }
+
