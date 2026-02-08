@@ -1,5 +1,25 @@
 eksctl_Linux_amd64.tar.gz
 node_modules/
 dist/
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+
+# Terraform binary
+terraform_*.zip
+
+# Node / Build
+node_modules/
+dist/
+
+# Env & logs
 .env
+*.log
+
+.env
+.terraform/
+*.tfstate
+*.tfstate.backup
 *.log
