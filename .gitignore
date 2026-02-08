@@ -1,0 +1,5 @@
+eksctl_Linux_amd64.tar.gz
+node_modules/
+dist/
+.env
+*.log
