@@ -41,7 +41,8 @@ The architecture follows a cloud-native CI/CD approach:
 - Application is exposed using AWS Load Balancer
 - Monitoring is handled using Prometheus and Grafana
 
-<img width="1536" height="1024" alt="arch_diagram" src="https://github.com/user-attachments/assets/88676827-24c2-4bf9-b1ac-3fa9daf72ec3" />
+<img width="1536" height="1024" alt="archdiagram_landscape" src="https://github.com/user-attachments/assets/02932a90-da36-4a68-a76e-8663ed7c52a6" />
+
 ---
 
 ## CI/CD Workflow
