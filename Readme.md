@@ -57,21 +57,6 @@ The architecture follows a cloud-native CI/CD approach:
 
 ---
 
-## Project Structure
-
-.
-├── Jenkins/
-│ └── Jenkinsfile
-├── deployment.yaml
-├── service.yaml
-├── grafana-lb.yaml
-├── main.tf
-├── README.md
-└── .gitignore
-
-
----
-
 ## Implementation Steps
 
 ### 1. Infrastructure Provisioning (Terraform)
